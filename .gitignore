@@ -1,0 +1,12 @@
+# Vivado / SDK
+*.jou
+*.log
+*.str
+.Xil/
+*.cache/
+*.runs/
+*.sim/
+*.hw/
+*.ip_user_files/
+.metadata/
+Debug/
