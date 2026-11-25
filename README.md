@@ -94,6 +94,15 @@ Zynq 規定 PL 進來的 IRQ_F2P[7:0] 對應 GIC SPI 61～68、[15:8] 對應 84�
 - 先設好 GIC，最後才寫 0x0C 開 IP 的中斷輸出
 
 ## 執行結果
+
+### 實作影片
+按下板子上的按鈕觸發中斷，左上角的 LED 跟著改變。
+
+<img src="docs/demo.gif" width="270" alt="按鈕中斷改變 LED 的實作影片">
+
+完整影片：[docs/demo.mp4](docs/demo.mp4)
+
+### 終端機輸出
 預期終端機輸出：
 ```
 === btnled_ip test (base 0x43c00000, irq 61) ===
