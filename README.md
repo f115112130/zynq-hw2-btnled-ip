@@ -24,6 +24,27 @@
  axi_timer_0 (0x42800000) ── interrupt ─► xlconcat In1 ─► IRQ_F2P[1] ─► GIC 62
 ```
 
+### Vivado Block Design
+
+![HW2 Block Design](docs/block_design.png)
+
+- `btnled_ip_0`：自製 IP，`S00_AXI` 接 `ps7_0_axi_periph/M00_AXI`，`btn[4:0]`、`led[7:0]` 拉到外部腳位，`irq` 接 `xlconcat_0/In0`
+- `axi_timer_0`：接 `M01_AXI`，`interrupt` 接 `xlconcat_0/In1`
+- `xlconcat_0`：把兩條中斷合成 2 bit，接到 `processing_system7_0/IRQ_F2P[1:0]`
+- `proc_sys_reset_0`：產生 AXI 的 reset（`peripheral_aresetn`）
+
+### 包裝後的 IP（btnled_ip_v1.0）
+
+<img src="docs/btnled_ip_symbol.png" width="220" alt="btnled_ip IP 方塊">
+
+| 介面 | 方向 | 說明 |
+|---|---|---|
+| `S00_AXI` | slave | AXI4-Lite，CPU 用它讀寫 4 個暫存器 |
+| `s00_axi_aclk` / `s00_axi_aresetn` | in | AXI 時脈（FCLK_CLK0）與 reset |
+| `btn[4:0]` | in | 5 顆按鈕 |
+| `led[7:0]` | out | 8 顆 LED（= slv_reg0[7:0]） |
+| `irq` | out | 按鈕中斷（level high）|
+
 ### 暫存器表
 
 | Offset | 名稱 | 讀寫 | 說明 |
